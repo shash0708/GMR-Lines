@@ -2,7 +2,7 @@ const express=  require('express');
 
 const app = express();
 
-ap.use(express.json());
+ap
 
 PORT=5000
 

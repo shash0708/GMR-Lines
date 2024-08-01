@@ -99,7 +99,7 @@ const Cards = () => {
     
     try {
       const selectedIds = selectedLogs.map(log => log.Id);
-      const response = await axios.post('https://gmr-lines.onrender.com/logs/export', selectedIds, {
+      const response = await axios.post('https://gmr-lines.onrender.com/api/export', selectedIds, {
         headers: {
             'Content-Type': 'application/json',
             "auth-token": localStorage.getItem('token')

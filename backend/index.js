@@ -1,16 +1,46 @@
-const express = require('express');
-const app = express();
+const express = require('express')
+const app = express()   
+const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+const bcrypt = require('bcryptjs')
+const cors = require('cors');
+app.use(cors())
+app.use(bodyParser.json());
+app.use(express.json())
 
-app.use(express.json());
-
-const PORT = 5000;
-
-app.use('/', (req, res) => {
-  res.send('Hello World');
+require('dotenv').config();
+const uri = ""
+mongoose.connect(process.env.MONGO_URI).then(() => {
+    console.log("Database Connected");
+}).catch((e) => {
+    console.log(e);
+    console.log("Database Can't Be Connected");
 });
 
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
+
+
+app.get('/', (req, res) => {
+    res.send('Hello World');
+  });
+  app.use('/getlogs',require('./Logs/logs'))
+  app.use('/getlogId',require('./Logs/logs'))
+
+  
+  app.use('/logs',require('./Logs/logs'))
+  
+  app.use('/delete',require('./Logs/logs'))
+  
+  app.use('/Bulkdelete',require('./Logs/logs'))
+
+  app.use('/update',require('./Logs/logs'))
+
+  app.use('/api',require('./Auth/Auth'))
+  
+  
+
+  
+
+  app.listen(process.env.PORT, () => {
+    console.log(`Example app listening at http://localhost:${process.env.PORT}`);
 });
 
-module.exports = app;

@@ -1,6 +1,6 @@
 {
   "short_name": "Log App",
-  "name": "A Digitial log book",
+  "name": "Create React App Sample",
   "icons": [
     {
       "src": "favicon.ico",

@@ -3,7 +3,7 @@ import Buttons from '../Buttons/Buttons.component';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const Home = () => {
-  useDocumentTitle('Log Book'); // Set the document title for this page
+  useDocumentTitle('GMR Log Book'); // Set the document title for this page
 
   const [ameNumber, setAmeNumber] = useState(''); // State to store AME number
   const [loading, setLoading] = useState(true); // State to handle loading

@@ -128,7 +128,7 @@ const Cards = () => {
     
     try {
         const selectedIds = selectedLogs.map(log => log.Id);
-        const response = await axios.post('https://gmr-lines.onrender.com/logs/pdf', selectedIds, {
+        const response = await axios.post('http://localhost:5000/logs/pdf', selectedIds, {
             headers: {
                 'Content-Type': 'application/json',
                 "auth-token": localStorage.getItem('token')

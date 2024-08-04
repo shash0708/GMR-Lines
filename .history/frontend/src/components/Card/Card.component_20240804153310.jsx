@@ -128,7 +128,7 @@ const Cards = () => {
     
     try {
         const selectedIds = selectedLogs.map(log => log.Id);
-        const response = await axios.post('https://gmr-lines.onrender.com/logs/pdf', selectedIds, {
+        const response = await axios.post(' /lohttp://localhost:5000gs/pdf', selectedIds, {
             headers: {
                 'Content-Type': 'application/json',
                 "auth-token": localStorage.getItem('token')
@@ -145,7 +145,7 @@ const Cards = () => {
         link.setAttribute('download', 'GMRLogBook.pdf');  // Set the correct file name
         document.body.appendChild(link);
         link.click();
-   
+        
         // Clean up and remove the link element
         document.body.removeChild(link);
         window.URL.revokeObjectURL(url); // Revoke the URL after download

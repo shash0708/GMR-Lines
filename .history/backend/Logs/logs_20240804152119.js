@@ -515,7 +515,11 @@ router.post('/pdf',fetchuser, async (req, res) => {
     const options = { format: 'A4', orientation: 'landscape' };
 
     pdf.create(html, options).toBuffer((err, buffer) => {
-    
+        if (err) {
+          console.log(err);
+
+            return res.status(500).send('Error generating PDF');
+        }
         res.set({
             'Content-Type': 'application/pdf',
             'Content-Disposition': 'attachment; filename=GmrLogBook.pdf'

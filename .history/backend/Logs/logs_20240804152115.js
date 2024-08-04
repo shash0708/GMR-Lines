@@ -4,8 +4,8 @@ const { validationResult } = require('express-validator');
 const Log = require('../Models/LogSchema'); // Adjust the path as needed
 const ExcelJS = require('exceljs');
 const fetchuser = require('../middleware/fetchUser')
-// const jwt = require('jsonwebtoken')
-// const PDFDocument = require('pdfkit');
+const jwt = require('jsonwebtoken')
+const PDFDocument = require('pdfkit');
 const pdf = require("html-pdf");
 // const template1 = require('../pdf-sample/template');
 let currentId = 0; // In-memory ID storage
@@ -515,7 +515,11 @@ router.post('/pdf',fetchuser, async (req, res) => {
     const options = { format: 'A4', orientation: 'landscape' };
 
     pdf.create(html, options).toBuffer((err, buffer) => {
-    
+        if (err) {
+          console.log(err);
+
+            return res.status(500).send('Error generating PDF');
+        }
         res.set({
             'Content-Type': 'application/pdf',
             'Content-Disposition': 'attachment; filename=GmrLogBook.pdf'

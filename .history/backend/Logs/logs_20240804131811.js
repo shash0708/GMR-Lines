@@ -398,7 +398,7 @@ router.post('/export', fetchuser,async (req, res) => {
 // });
 
 
-router.post('/pdf',fetchuser, async (req, res) => {
+router.post('/',fetchuser, async (req, res) => {
   const selectedIds = req.body;
 
   try {

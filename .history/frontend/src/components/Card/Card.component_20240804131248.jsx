@@ -66,7 +66,7 @@ const Cards = () => {
     const handleSearch = () => {
       const lowerCaseSearchTerm = searchTerm.toLowerCase();
       const filtered = logs.filter(log => {
-        const logId = String(log.Toa);
+        const logId = String(log.Id);
         return logId.toLowerCase().includes(lowerCaseSearchTerm);
       });
       setFilteredLogs(filtered);
@@ -128,7 +128,7 @@ const Cards = () => {
     
     try {
         const selectedIds = selectedLogs.map(log => log.Id);
-        const response = await axios.post(' http://localhost:5000/logs/pdf', selectedIds, {
+        const response = await axios.post('https://gmr-lines.onrender.com/logs/exp', selectedIds, {
             headers: {
                 'Content-Type': 'application/json',
                 "auth-token": localStorage.getItem('token')
@@ -178,7 +178,7 @@ const Cards = () => {
               checked={selectedLogs.includes(log)}
               onChange={() => handleSelect(log)}
             />
-            <Card date={new Date(log.createdAt).toLocaleDateString()} ToA={log.ToA} id={log.Id} />
+            <Card date={new Date(log.createdAt).toLocaleDateString()} id={log.ToA} />
           </div>
         ))}
       </CardContainer>

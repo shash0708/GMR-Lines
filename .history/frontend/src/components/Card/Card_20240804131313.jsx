@@ -175,7 +175,6 @@ const Card = ({ date, id,ToA }) => {
       <StyledCard onClick={handleCardClick}>
         <div>Date: {date}</div>
         <div>ID: {id}</div>
-        <div>ToA: {ToA}</div>
       </StyledCard>
 
       {modalOpen && editableLog && (

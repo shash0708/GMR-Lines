@@ -77,7 +77,7 @@ const DeleteButton = styled.button`
   cursor: pointer;
 `;
 
-const Card = ({ date, id,ToA }) => {
+const Card = ({ date, id }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [editableLog, setEditableLog] = useState(null);
   const navigate = useNavigate();
@@ -175,7 +175,6 @@ const Card = ({ date, id,ToA }) => {
       <StyledCard onClick={handleCardClick}>
         <div>Date: {date}</div>
         <div>ID: {id}</div>
-        <div>ToA: {ToA}</div>
       </StyledCard>
 
       {modalOpen && editableLog && (

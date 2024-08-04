@@ -142,7 +142,7 @@ const Cards = () => {
         // Create a link element and trigger a download
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', 'GMRLogBook.pdf');  // Set the correct file name
+        link.setAttribute('download', 'LogBook.pdf');  // Set the correct file name
         document.body.appendChild(link);
         link.click();
         

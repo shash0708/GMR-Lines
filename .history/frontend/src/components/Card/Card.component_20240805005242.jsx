@@ -130,7 +130,7 @@ const Cards = () => {
         const selectedIds = selectedLogs.map(log => log.Id);
         const token = localStorage.getItem('token');
 
-        const response = await fetch(' http://localhost:5000/logs/pdf', {
+        const response = await fetch('https://gmr-lines.onrender.com/logs/pdf', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

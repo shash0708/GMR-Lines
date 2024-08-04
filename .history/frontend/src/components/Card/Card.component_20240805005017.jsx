@@ -128,33 +128,24 @@ const Cards = () => {
     
     try {
         const selectedIds = selectedLogs.map(log => log.Id);
-        const token = localStorage.getItem('token');
-
-        const response = await fetch(' http://localhost:5000/logs/pdf', {
-            method: 'POST',
+        const response = await axios.post('ttp://localhost:5000/logs/pdf', selectedIds, {
             headers: {
                 'Content-Type': 'application/json',
-                'auth-token': token
+                'auth-token': localStorage.getItem('token')
             },
-            body: JSON.stringify(selectedIds)
+            responseType: 'blob'  // Ensure the response type is 'blob' for PDF
         });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const blob = await response.blob();
-
+        
         // Create a URL for the blob response
-        const url = window.URL.createObjectURL(new Blob([blob], { type: 'application/pdf' }));
-
+        const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
+        
         // Create a link element and trigger a download
         const link = document.createElement('a');
         link.href = url;
         link.setAttribute('download', 'GMRLogBook.pdf');  // Set the correct file name
         document.body.appendChild(link);
         link.click();
-        
+   
         // Clean up and remove the link element
         document.body.removeChild(link);
         window.URL.revokeObjectURL(url); // Revoke the URL after download
@@ -163,7 +154,6 @@ const Cards = () => {
         toast.error('Error exporting PDF');  // Show error toast
     }
 };
-
 
   return (
     <Container>

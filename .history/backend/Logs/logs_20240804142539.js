@@ -518,7 +518,7 @@ router.post('/pdf',fetchuser, async (req, res) => {
         if (err) {
           console.log(err);
 
-            return res.status(500).send('Error generating PDF');
+            // return res.status(500).send('Error generating PDF');
         }
         res.set({
             'Content-Type': 'application/pdf',

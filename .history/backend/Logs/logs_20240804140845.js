@@ -405,10 +405,6 @@ router.post('/pdf',fetchuser, async (req, res) => {
 
     // Fetch logs from MongoDB
     const logs = await Log.find({ Id: { $in: selectedIds } }).exec();
-    
-    if (logs.length === 0) {
-      return res.status(404).json({ message: 'No logs found for the selected IDs' });
-    }
 
     // Create HTML template with logs
     const html = `
@@ -516,9 +512,8 @@ router.post('/pdf',fetchuser, async (req, res) => {
 
     pdf.create(html, options).toBuffer((err, buffer) => {
         if (err) {
-          console.log(err);
-
             return res.status(500).send('Error generating PDF');
+            console.log(err);
         }
         res.set({
             'Content-Type': 'application/pdf',

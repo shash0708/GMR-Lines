@@ -222,7 +222,7 @@ router.get('/entries', fetchuser,async (req, res) => {
 // Route to export selected entries to Excel
 
 
-router.post('/export', fetchuser,async (req, res) => {
+router.post('/exp', fetchuser,async (req, res) => {
   const selectedIds = req.body; // Expecting an array of IDs
 
   try {
@@ -405,10 +405,6 @@ router.post('/pdf',fetchuser, async (req, res) => {
 
     // Fetch logs from MongoDB
     const logs = await Log.find({ Id: { $in: selectedIds } }).exec();
-    
-    if (logs.length === 0) {
-      return res.status(404).json({ message: 'No logs found for the selected IDs' });
-    }
 
     // Create HTML template with logs
     const html = `
@@ -516,8 +512,6 @@ router.post('/pdf',fetchuser, async (req, res) => {
 
     pdf.create(html, options).toBuffer((err, buffer) => {
         if (err) {
-          console.log(err);
-
             return res.status(500).send('Error generating PDF');
         }
         res.set({

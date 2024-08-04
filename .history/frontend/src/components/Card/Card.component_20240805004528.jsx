@@ -120,41 +120,7 @@ const Cards = () => {
   };
   
 
-  const handleExportPDF = async () => {
-    if (selectedLogs.length === 0) {
-        toast.info('Please select at least one log to export.');  // Show info toast
-        return;
-    }
-    
-    try {
-        const selectedIds = selectedLogs.map(log => log.Id);
-        const response = await axios.post('https://gmr-lines.onrender.com/logs/pdf', selectedIds, {
-            headers: {
-                'Content-Type': 'application/json',
-                'auth-token': localStorage.getItem('token')
-            },
-            responseType: 'blob'  // Ensure the response type is 'blob' for PDF
-        });
-        
-        // Create a URL for the blob response
-        const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
-        
-        // Create a link element and trigger a download
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', 'GMRLogBook.pdf');  // Set the correct file name
-        document.body.appendChild(link);
-        link.click();
-   
-        // Clean up and remove the link element
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(url); // Revoke the URL after download
-    } catch (error) {
-        console.error('Error exporting PDF:', error);
-        toast.error('Error exporting PDF');  // Show error toast
-    }
-};
-
+  
   return (
     <Container>
       <InputText

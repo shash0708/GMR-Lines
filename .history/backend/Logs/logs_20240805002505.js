@@ -516,17 +516,22 @@ router.post('/pdf',fetchuser, async (req, res) => {
 
     pdf.create(html, options).toBuffer((err, buffer) => {
       if (err) {
-        console.error('Error creating PDF:', err);
-        return res.status(500).send('Error creating PDF');
+        res.status(500).send({ error: "Error generating PDF" });
+        console.log(err);
+      } else {
+             res.set({
+            'Content-Type': 'application/pdf',
+            'Content-Disposition': 'attachment; filename=GmrLogBook.pdf'
+        });
+        res.send(buffer);
+        res.status(200).send({ success: true });
       }
-      res.set({
-        'Content-Type': 'application/pdf',
-        'Content-Disposition': 'attachment; filename=GmrLogBook.pdf',
-        'Content-Length': buffer.length
-      });
-      res.send(buffer);
+        // res.set({
+        //     'Content-Type': 'application/pdf',
+        //     'Content-Disposition': 'attachment; filename=GmrLogBook.pdf'
+        // });
+        // res.send(buffer);
     });
-    
   } catch (error) {
     console.error('Error fetching logs or generating PDF:', error);
     res.status(500).send('Error fetching logs or generating PDF');

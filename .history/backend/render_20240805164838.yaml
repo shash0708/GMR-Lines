@@ -1,0 +1,12 @@
+services:
+   type: web
+    name: your-service-name
+    env: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: node index.js
+    build:
+      command: |
+        npm install
+        npm install puppeteer
+        npx puppeteer install

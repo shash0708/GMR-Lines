@@ -7,7 +7,7 @@ const fetchuser = require('../middleware/fetchUser')
 // const pdf = require('html-pdf')
 const puppeteer = require('puppeteer');
 const fs = require("fs");
-const generatePDF = require('../template/generatePdf')
+const generatePDF = require(',,.')
 //Route 1
 router.post('/createLog', fetchuser, async (req, res) => {
   try {

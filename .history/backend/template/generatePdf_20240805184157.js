@@ -1,4 +1,3 @@
-// File: pdfGenerator.js
 const puppeteer = require('puppeteer');
 
 const generatePDF = async (logs) => {
@@ -125,5 +124,3 @@ const generatePDF = async (logs) => {
 
   return pdfBuffer;
 };
-
-module.exports = generatePDF;

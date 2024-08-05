@@ -7,7 +7,7 @@ const fetchuser = require('../middleware/fetchUser')
 // const pdf = require('html-pdf')
 const puppeteer = require('puppeteer');
 const fs = require("fs");
-const generatePDF = require('../template/generatePdf')
+
 //Route 1
 router.post('/createLog', fetchuser, async (req, res) => {
   try {
@@ -731,10 +731,10 @@ router.post('/pf', fetchuser, async (req, res) => {
 //   }
 // });
 
-// router.get("/fetch-pdf", (req, res) => {
-//   console.log("sending");
-//   res.sendFile(`${__dirname}/Resume.pdf`);
-// });
+router.get("/fetch-pdf", (req, res) => {
+  console.log("sending");
+  res.sendFile(`${__dirname}/Resume.pdf`);
+});
 
 router.post('/pdf', fetchuser, async (req, res) => {
   const selectedIds = req.body; // Expecting an array of IDs
@@ -746,16 +746,7 @@ router.post('/pdf', fetchuser, async (req, res) => {
     if (logs.length === 0) {
       return res.status(404).json({ message: 'No logs found for the selected IDs' });
     }
-
-      const pdfBuffer = await generatePDF(logs);
-      res.setHeader('Content-Type', 'application/pdf');
-      res.setHeader('Content-Disposition', 'attachment; filename=report.pdf');
-      res.send(pdfBuffer);
-    } catch (error) {
-      console.error('Error generating PDF:', error);
-      res.status(500).send('Error generating PDF');
-    }
-  });
+  ))}
 
 
 

@@ -4,8 +4,7 @@ const { validationResult } = require('express-validator');
 const Log = require('../Models/LogSchema'); // Adjust the path as needed
 const ExcelJS = require('exceljs');
 const fetchuser = require('../middleware/fetchUser')
-// const pdf = require('html-pdf')
-const puppeteer = require('puppeteer');
+const pdf = require('html-pdf')
 
 //Route 1
 router.post('/createLog', fetchuser, async (req, res) => {

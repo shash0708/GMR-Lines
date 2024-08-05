@@ -4,8 +4,7 @@ const { validationResult } = require('express-validator');
 const Log = require('../Models/LogSchema'); // Adjust the path as needed
 const ExcelJS = require('exceljs');
 const fetchuser = require('../middleware/fetchUser')
-// const pdf = require('html-pdf')
-const puppeteer = require('puppeteer');
+const pdf = require('html-pdf')
 
 //Route 1
 router.post('/createLog', fetchuser, async (req, res) => {
@@ -526,81 +525,6 @@ router.post('/export', fetchuser,async (req, res) => {
 //   });
 // });
 
-router.post('/pdf', fetchuser, async (req, res) => {
-  const selectedIds = req.body; // Expecting an array of IDs
-
-  try {
-    // Fetch logs from MongoDB
-    const logs = await Log.find({ Id: { $in: selectedIds } }).exec();
-
-    if (logs.length === 0) {
-      return res.status(404).json({ message: 'No logs found for the selected IDs' });
-    }
-
-    // Launch Puppeteer
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-
-    // Generate HTML content
-    let htmlContent = `
-      <html>
-        <head>
-          <style>
-            table { width: 100%; border-collapse: collapse; }
-            th, td { border: 1px solid black; padding: 8px; text-align: left; }
-            th { background-color: #f2f2f2; }
-          </style>
-        </head>
-        <body>
-          <h1>Logbook</h1>
-          <table>
-            <thead>
-              <tr>
-                <th>SL NO.</th>
-                <th>Date & Time</th>
-                <th>Type of Aircraft/Engine</th>
-                <!-- Add more headers as needed -->
-              </tr>
-            </thead>
-            <tbody>
-    `;
-
-    logs.forEach((log, index) => {
-      htmlContent += `
-        <tr>
-          <td>${log.Id}</td>
-          <td>${new Date(log.createdAt).toLocaleDateString()}</td>
-          <td>${log.ToA}</td>
-          <!-- Add more fields as needed -->
-        </tr>
-      `;
-    });
-
-    htmlContent += `
-            </tbody>
-          </table>
-        </body>
-      </html>
-    `;
-
-    // Set content and generate PDF
-    await page.setContent(htmlContent);
-    const pdfBuffer = await page.pdf({ format: 'A4' });
-
-    await browser.close();
-
-    res.set({
-      'Content-Type': 'application/pdf',
-      'Content-Disposition': 'attachment; filename=Logbook.pdf',
-      'Content-Length': pdfBuffer.length
-    });
-
-    res.send(pdfBuffer);
-  } catch (error) {
-    console.error('Error fetching logs or generating PDF:', error);
-    res.status(500).send('Error fetching logs or generating PDF');
-  }
-});
 
 // router.post('/pdf', fetchuser, async (req, res) => {
 //   const selectedIds = req.body; // Expecting an array of IDs

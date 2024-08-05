@@ -737,7 +737,7 @@ router.post('/pdf', fetchuser, async (req, res) => {
 // });
 
 
-router.get("/generate-pdf", async (req, res) => {
+app.get("/generate-pdf", async (req, res) => {
   try {
     // Launch Puppeteer and generate PDF
     const browser = await puppeteer.launch({ headless: true });

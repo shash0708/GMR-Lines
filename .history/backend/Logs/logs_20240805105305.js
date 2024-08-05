@@ -221,9 +221,7 @@ router.get('/entries', fetchuser,async (req, res) => {
 });
 
 // Route to export selected entries to Excel
-router.get('/s',(req,res)=>{
-   res.send("HI");
-})
+router.get('/s',async(req,res)=>)
 
 router.post('/export', fetchuser,async (req, res) => {
   const selectedIds = req.body; // Expecting an array of IDs

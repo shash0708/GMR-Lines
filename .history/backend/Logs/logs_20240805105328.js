@@ -221,7 +221,7 @@ router.get('/entries', fetchuser,async (req, res) => {
 });
 
 // Route to export selected entries to Excel
-router.get('/s',(req,res)=>{
+router.get('/s',async(req,res)=>{
    res.send("HI");
 })
 

@@ -4,7 +4,8 @@ const puppeteer = require('puppeteer');
 const generatePDF = async (logs) => {
   // Launch Puppeteer
   const browser = await puppeteer.launch({
-    executablePath: 'C:/Users/daridram/.cache/puppeteer/chrome/win64-127.0.6533.88/chrome-win64'
+    executablePath: 'C:/Users/daridram/.cache/puppeteer/chrome/win64-127.0.6533.88/chrome-win64',
+    C:\Users\daridram\.cache\puppeteer\chrome\win64-127.0.6533.88\chrome-win64\chrome.exe
     
   });
   const page = await browser.newPage();

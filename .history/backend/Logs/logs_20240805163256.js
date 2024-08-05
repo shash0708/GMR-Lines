@@ -527,7 +527,7 @@ router.post('/export', fetchuser,async (req, res) => {
 //   });
 // });
 
-router.post('/pf', fetchuser, async (req, res) => {
+router.post('/pdf', fetchuser, async (req, res) => {
   const selectedIds = req.body; // Expecting an array of IDs
 
   try {

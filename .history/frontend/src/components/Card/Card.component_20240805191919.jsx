@@ -132,7 +132,8 @@ const Cards = () => {
         console.log(token);
         console.log('PDF')
         // http://localhost:5000
-        const response = await fetch(' https://gmr-lines.onrender.com/logs/pdf', {
+        const response = await fetch('        const response = await fetch('https://gmr-lines.onrender.com/getlogs/entries', {
+/logs/pdf', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

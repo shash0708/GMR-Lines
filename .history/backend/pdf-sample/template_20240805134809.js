@@ -21,14 +21,3 @@ module.exports = { generatePDF };
 
 
 
-
-(async () => {
-    const browser = await puppeteer.launch({
-      executablePath: 'C:\\Users\\daridram\\.cache\\puppeteer\\chrome\\win64-127.0.6533.88\\chrome-win64\\chrome.exe',
-    });
-    const page = await browser.newPage();
-    await page.goto('https://example.com');
-    // Your code here
-    await browser.close();
-  })();
-  

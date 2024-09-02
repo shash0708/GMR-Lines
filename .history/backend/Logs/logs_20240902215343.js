@@ -4,11 +4,13 @@ const { validationResult } = require('express-validator');
 const Log = require('../Models/LogSchema'); // Adjust the path as needed
 const ExcelJS = require('exceljs');
 const fetchuser = require('../middleware/fetchUser')
+const { exec } = require('child_process');
+const fs = require('fs');
+const pdf = require('slimer-html-pdf');
+
 // const pdf = require('html-pdf')
 // const puppeteer = require('puppeteer');
-const fs = require("fs");
-const { exec } = require('child_process');
-
+// const fs = require("fs");
 // const generatePDF = require('../template/generatePdf')
 //Route 1
 router.post('/createLog', fetchuser, async (req, res) => {
@@ -769,6 +771,10 @@ router.get('/los', fetchuser,async (req, res) => {
 //     }
 //   });
 
+
+
+
+
 router.post('/pdf', fetchuser, async (req, res) => {
   const selectedIds = req.body;
 
@@ -881,32 +887,20 @@ router.post('/pdf', fetchuser, async (req, res) => {
     `;
 
     // Save HTML to a temporary file
-    fs.writeFileSync('template.html', html);
-
-    // Call the Python script to generate the PDF
-    exec('python generate_pdf.py template.html output.pdf', (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Error generating PDF: ${error}`);
-        return res.status(500).send('Error generating PDF');
-      }
-
-      // Send the generated PDF file as a response
-      res.set({
-        'Content-Type': 'application/pdf',
-        'Content-Disposition': 'attachment; filename=GmrLogBook.pdf'
-      });
-      fs.createReadStream('output.pdf').pipe(res);
-    });
+  
+pdf.create(html, { format: 'A4' }).toFile('output.pdf', (err, res) => {
+  if (err) {
+    console.error('Error generating PDF:', err);
+    return;
+  }
+  console.log('PDF generated:', res);
+});
+ 
   } catch (error) {
     console.error('Error fetching logs or generating PDF:', error);
     res.status(500).send('Error fetching logs or generating PDF');
   }
 });
-
-
-
-
-
 
 
 

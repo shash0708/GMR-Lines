@@ -1,0 +1,9 @@
+services:
+- type: web
+  name: my-app
+  env: python
+  buildCommand: "pip install -r requirements.txt"
+  startCommand: "your_start_command_here"
+  setupCommands:
+    - apt-get update
+    - apt-get install -y wkhtmltopdf

@@ -4,11 +4,13 @@ const { validationResult } = require('express-validator');
 const Log = require('../Models/LogSchema'); // Adjust the path as needed
 const ExcelJS = require('exceljs');
 const fetchuser = require('../middleware/fetchUser')
+const { exec } = require('child_process');
+const fs = require('fs');
+const pdf = require('slimer-html-pdf');
+
 // const pdf = require('html-pdf')
 // const puppeteer = require('puppeteer');
-const fs = require("fs");
-const { exec } = require('child_process');
-
+// const fs = require("fs");
 // const generatePDF = require('../template/generatePdf')
 //Route 1
 router.post('/createLog', fetchuser, async (req, res) => {
@@ -769,6 +771,10 @@ router.get('/los', fetchuser,async (req, res) => {
 //     }
 //   });
 
+
+
+
+
 router.post('/pdf', fetchuser, async (req, res) => {
   const selectedIds = req.body;
 
@@ -895,18 +901,13 @@ router.post('/pdf', fetchuser, async (req, res) => {
         'Content-Type': 'application/pdf',
         'Content-Disposition': 'attachment; filename=GmrLogBook.pdf'
       });
-      fs.createReadStream('output.pdf').pipe(res);
+    
     });
   } catch (error) {
     console.error('Error fetching logs or generating PDF:', error);
     res.status(500).send('Error fetching logs or generating PDF');
   }
 });
-
-
-
-
-
 
 
 

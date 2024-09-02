@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: my-service
+    runtime: python  # Specify the runtime here
+    buildCommand: ./install-wkhtmltopdf.sh && pip install -r requirements.txt
+    startCommand: gunicorn app:app

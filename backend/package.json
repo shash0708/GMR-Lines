@@ -4,9 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "export PUPPETEER_SKIP_DOWNLOAD=false && npm install puppeteer"
-
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -25,7 +23,6 @@
     "mongoose": "^8.5.2",
     "nodemon": "^3.1.4",
     "pdf-creator-node": "^2.3.5",
-    "pdfkit": "^0.15.0",
-    "puppeteer": "^22.15.0"
+    "pdfkit": "^0.15.0"
   }
 }

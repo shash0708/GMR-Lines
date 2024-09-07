@@ -38,7 +38,7 @@ const Form = () => {
         const logData = {Id, ToA, reg, ATA, Wo, Mt, TOM:TOM?.name,TOA:TOA?.name, C:C?.name, DU, Supervisor };
         
         try {
-            const response = await fetch(`${URL}/logs/createLog`, {
+            const response = await fetch(`${URL}logs/createLog`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

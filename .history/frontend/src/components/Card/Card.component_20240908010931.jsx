@@ -147,7 +147,7 @@ const Cards = () => {
       // Create a temporary HTML element to hold the content
       const tempDiv = document.createElement('div');
       tempDiv.innerHTML = htmlContent;
-      // document.body.appendChild(tempDiv);
+      document.body.appendChild(tempDiv);
   
       // Convert the temporary HTML content to PDF
       html2pdf()

@@ -3,7 +3,6 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { InputText } from 'primereact/inputtext';
 import Card from './Card';
-import html2pdf from 'html2pdf.js';
 
 import './Card.css';
 import { ToastContainer, toast } from 'react-toastify';  // Import toast functions
@@ -40,6 +39,7 @@ const Cards = () => {
   useDocumentTitle('Past Entries');
 
   const { filteredLogs, searchTerm, setSearchTerm, selectedLogs, handleSelect } = useContext(LogsContext);
+
   const handleExportPDF = async () => {
     if (selectedLogs.length === 0) {
       toast.info('Please select at least one log to export.');
@@ -76,6 +76,9 @@ const Cards = () => {
             }
             .wide-column {
               width: 30%;
+            }
+            .wide-colum {
+              width: 2ch;
             }
             .fixed-width {
               width: 7px;
@@ -144,26 +147,19 @@ const Cards = () => {
         </html>
       `;
   
-      // Create a temporary HTML element to hold the content
-      const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = htmlContent;
-      // document.body.appendChild(tempDiv);
+      // Create a blob from the HTML content
+      const blob = new Blob([htmlContent], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
   
-      // Convert the temporary HTML content to PDF
-      html2pdf()
-        .from(tempDiv)
-        .save('Logbook.pdf')
-        .then(() => {
-          // Cleanup
-          document.body.removeChild(tempDiv);
-        });
-  
+      // Convert HTML to PDF
+      html2pdf().from(url).toPdf().get('pdf').then(function(pdf) {
+        pdf.save('Logbook.pdf');
+      });
     } catch (error) {
       console.error('Error exporting PDF:', error);
       toast.error('Error exporting PDF');
     }
   };
-  
   
 
   return (

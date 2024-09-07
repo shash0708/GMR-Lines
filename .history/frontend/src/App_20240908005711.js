@@ -12,10 +12,9 @@ import Navbar from './components/Header/Header.component'
 import Login from './components/Login/Login.component';
 import Signup from './components/SignUp/Signup.component';
 import PdfComponent from './components/Pdf/PdfComponent';
-import { LogsProvider } from './context/LogContext';
+import {Lo}
 function App() {
   return (
-    <LogsProvider>
     <PrimeReactProvider>
 <Router>
 <Navbar />
@@ -33,7 +32,6 @@ function App() {
       </Routes>
     </Router>
 </PrimeReactProvider>
-</LogsProvider>
   );
 }
 

@@ -906,7 +906,7 @@ router.post('/pdf', fetchuser, async (req, res) => {
 
 
 
-router.post('/data', async (req, res) => {
+router.post('/logs/data', async (req, res) => {
   const { selectedIds } = req.body;
 
   try {

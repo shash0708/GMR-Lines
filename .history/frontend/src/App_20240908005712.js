@@ -15,7 +15,6 @@ import PdfComponent from './components/Pdf/PdfComponent';
 import { LogsProvider } from './context/LogContext';
 function App() {
   return (
-    <LogsProvider>
     <PrimeReactProvider>
 <Router>
 <Navbar />
@@ -33,7 +32,6 @@ function App() {
       </Routes>
     </Router>
 </PrimeReactProvider>
-</LogsProvider>
   );
 }
 

@@ -1,5 +1,5 @@
 // src/config.js
-const URL = "https://gmr-lines.onrender.com";
+const URL = "";
 
 export default URL;
 

@@ -11,6 +11,7 @@ import Data from './components/Data/Data.component';
 import Navbar from './components/Header/Header.component'
 import Login from './components/Login/Login.component';
 import Signup from './components/SignUp/Signup.component';
+import PdfComponent from './components/Pdf/PdfComponent';
 function App() {
   return (
     <PrimeReactProvider>
@@ -26,6 +27,7 @@ function App() {
         <Route path="/form" element={<Form />} />
         <Route path="/past-records" element={<Cards />} /> 
         <Route path="/data/:id" element={<Data />} />
+        <Rout
       </Routes>
     </Router>
 </PrimeReactProvider>

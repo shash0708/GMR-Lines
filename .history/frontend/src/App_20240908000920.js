@@ -27,7 +27,7 @@ function App() {
         <Route path="/form" element={<Form />} />
         <Route path="/past-records" element={<Cards />} /> 
         <Route path="/data/:id" element={<Data />} />
-        <Route path="/pdf" element={<PdfComponent/>}/>
+        <Route path="/pdf" element={}
       </Routes>
     </Router>
 </PrimeReactProvider>

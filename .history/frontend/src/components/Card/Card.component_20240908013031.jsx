@@ -76,7 +76,9 @@ const Cards = () => {
               padding: 8px;
               text-align: left;
             }
-            
+            th {
+              background-color: #f2f2f2;
+            }
             .wide-column {
               width: 30%;
             }
@@ -161,12 +163,13 @@ const Cards = () => {
       // Create a temporary HTML element to hold the content
       const tempDiv = document.createElement('div');
       tempDiv.innerHTML = htmlContent;
+      document.body.appendChild(tempDiv);
   
       // Convert the temporary HTML content to PDF
       html2pdf().from(tempDiv).set({
         margin: [10, 10, 10, 10], // Adjust margins as needed
         filename: 'Logbook.pdf',
-        html2canvas: { scale:10 }, // Increase scale for better quality
+        html2canvas: { scale:02 }, // Increase scale for better quality
         jsPDF: { format: 'a4', orientation: 'landscape' } // Set to A4 and landscape orientation
       }).save().then(() => {
         // Cleanup

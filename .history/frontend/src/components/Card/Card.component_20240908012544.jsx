@@ -53,77 +53,66 @@ const Cards = () => {
         <html lang="en">
         <head>
           <meta charset="UTF-8">
+          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.5/css/mdb.min.css" rel="stylesheet">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>Logbook</title>
-          <style>
+          <style>    
             body {
-              font-family: 'Garamond', serif;
-              font-size: 12px; /* Adjust font size for better quality */
-              margin: 0;
-              padding: 0;
+              font-family: 'Garamond';
             }
             .table-container {
-              margin: 20px;
-              overflow: hidden;
+              margin: 100px;
             }
             table {
               width: 100%;
               border-collapse: collapse;
-              page-break-inside: auto; /* Ensure tables don't break awkwardly */
             }
             th, td {
               border: 1px solid black;
               padding: 8px;
               text-align: left;
             }
-            
             .wide-column {
               width: 30%;
             }
+                 .wide-colum {
+        width: 2ch;
+    }
             .fixed-width {
-              width: 60px; /* Adjust column width as needed */
+              width: 7px;
             }
             .fixed-col {
               height: 70px;
-            }
-            @media print {
-              table {
-                page-break-inside: auto;
-              }
-              tr {
-                page-break-inside: avoid;
-                page-break-after: auto;
-              }
             }
           </style>
         </head>
         <body>
           <div class="table-container">
             <table>
-              <thead>
-                <tr class="fixed-col">
-                  <th colspan="11">AIRCRAFT MAINTENANCE ENGINEER'S WORK RECORD/LOGBOOK</th>
-                  <th colspan="5">
-                    Name<br>
-                    Ps<br>
-                    Ij
-                  </th>
-                </tr>
-                <tr>
-                  <th class="fixed-width">SL NO.</th>
-                  <th class="fixed-width">Date & Time</th>
-                  <th class="fixed-width">Type of Aircraft/Engine</th>
-                  <th class="fixed-width">Aircraft Reg.</th>
-                  <th class="fixed-width">ATA Chapter</th>
-                  <th class="fixed-width">Work Order No.</th>
-                  <th class="wide-column" colspan="5">Maintenance Task</th>
-                  <th class="fixed-width">Type of Maintenance</th>
-                  <th class="fixed-width">Type of Activity</th>
-                  <th class="fixed-width">Category</th>
-                  <th class="fixed-width">Duration in Hrs./Days</th>
-                  <th colspan="5">Supervisor Name & Sign,AME Licence No</th>
-                </tr>
-              </thead>
+              <tr class="fixed-col">
+                <th colspan="11">AIRCRAFT MAINTENANCE ENGINEER'S WORK RECORD/LOGBOOK</th>
+                <th colspan="5">
+                  Name<br>
+                  Ps<br>
+                  Ij
+                </th>
+              </tr>
+              <tr>
+                <th class="fixed-width">SL NO.</th>
+                <th class="fixed-width">Date & Time</th>
+                <th class="fixed-width">Type of Aircraft/Engine</th>
+                <th class="fixed-width">Aircraft Reg.</th>
+                <th class="fixed-width">ATA Chapter</th>
+                <th class="fixed-width">Work Order No.</th>
+                <th class="wide-column" colspan="5">Maintenance Task</th>
+                <th class="fixed-width">Type of Maintenance</th>
+                <th class="fixed-width">Type of Activity</th>
+                <th class="fixed-width">Category</th>
+                <th class="fixed-width">Duration in Hrs./Days</th>
+                <th colspan="5">Supervisor Name & Sign,AME Licence No</th>
+              </tr>
               <tbody>
                 ${selectedLogs.map((log, index) => `
                   <tr>
@@ -161,17 +150,16 @@ const Cards = () => {
       // Create a temporary HTML element to hold the content
       const tempDiv = document.createElement('div');
       tempDiv.innerHTML = htmlContent;
+      // document.body.appendChild(tempDiv);
   
       // Convert the temporary HTML content to PDF
-      html2pdf().from(tempDiv).set({
-        margin: [10, 10, 10, 10], // Adjust margins as needed
-        filename: 'Logbook.pdf',
-        html2canvas: { scale:10 }, // Increase scale for better quality
-        jsPDF: { format: 'a4', orientation: 'landscape' } // Set to A4 and landscape orientation
-      }).save().then(() => {
-        // Cleanup
-        document.body.removeChild(tempDiv);
-      });
+      html2pdf()
+        .from(tempDiv)
+        .save('Logbook.pdf')
+        .then(() => {
+          // Cleanup
+          document.body.removeChild(tempDiv);
+        });
   
     } catch (error) {
       console.error('Error exporting PDF:', error);

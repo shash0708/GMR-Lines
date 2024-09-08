@@ -2,7 +2,6 @@ import React, { useState ,useRef} from 'react';
 import { InputText } from 'primereact/inputtext'; 
 import { Button } from 'primereact/button'; 
 import { FloatLabel } from 'primereact/floatlabel';
-import Buttons from '../Buttons/Buttons.component';
 import { Dropdown } from 'primereact/dropdown';
 import { Toast } from 'primereact/toast'; // Import Toast component
 import 'primereact/resources/themes/saga-blue/theme.css'; 
@@ -144,11 +143,9 @@ const Form = () => {
                         <label htmlFor="Supervisor">Supervisor</label>
                     </FloatLabel>
                 </div>
-                <Button type="submit" label="Update Log" className="blue-button" />
-
-
+                
+                <Butt type="submit" label="Update Log" />
             </form>
-
             {/* <MaskDemo/> */}
         </div>
     );

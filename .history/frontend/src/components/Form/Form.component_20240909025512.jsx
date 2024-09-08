@@ -144,11 +144,10 @@ const Form = () => {
                         <label htmlFor="Supervisor">Supervisor</label>
                     </FloatLabel>
                 </div>
-                <Button type="submit" label="Update Log" className="blue-button" />
-
-
+                
+                <Button type="submit" label="Update Log" <Button type="submit" label="Update Log" className="blue-button" />
+                />
             </form>
-
             {/* <MaskDemo/> */}
         </div>
     );

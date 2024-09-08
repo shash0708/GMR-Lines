@@ -11,7 +11,7 @@
     min-height: 7vh;
     margin: 0px; /* Ensure it takes up the full viewport height */
     flex-direction: column; /* Stack the form vertically */
-   /* Optional: background color for the container */
+    background-color: #ffffff; /* Optional: background color for the container */
     /* border-radius: 8px; Optional: rounded corners for the container */
     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); Optional: subtle shadow for the container */
 }

@@ -1,0 +1,64 @@
+/* Navbar.css */
+.navbar {
+    display: flex;
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 20px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    width: auto; /* Adjust width based on content */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional */
+    z-index: 1000; /* Optional */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transition for expanding and zooming */
+    opacity: 0;
+  }
+  
+  .navbar.show {
+    opacity: 1;
+  }
+  
+  .navbar.hide {
+    opacity: 0;
+    pointer-events: none; /* Optional: prevents interaction when hidden */
+  }
+  
+  .navbar:hover {
+    width: 300px; /* Adjust width on hover */
+    transform: scale(1.05); /* Slightly zoom out */
+  }
+  
+  .navbar-items {
+    display: flex;
+    transition: transform 0.1s ease; /* Transition for item zoom effect */
+  }
+  
+  .navbar-items a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    transition: transform 0.1s ease; /* Transition for icon zoom effect */
+  }
+  
+  .navbar-items a:hover {
+    background-color: #555;
+    border-radius: 20px;
+    transform: scale(1.1); /* Zoom in on hover */
+  }
+  
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      bottom: 10px;
+      width: auto; /* Adjust width for smaller screens */
+    }
+  
+    .navbar-content {
+      margin-bottom: 5px;
+    }
+  }
+  

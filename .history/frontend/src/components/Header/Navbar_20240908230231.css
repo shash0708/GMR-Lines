@@ -1,0 +1,63 @@
+/* Navbar.css */
+.navbar {
+    display: flex;
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 20px; /* Adjust as needed to place it just above the bottom of the screen */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    width: auto; /* Adjust width based on content */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow for better visibility */
+    z-index: 1000; /* Optional: ensures it's above other content */
+  }
+  
+  .navbar-content {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .navbar-content button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .navbar-content button:hover {
+    background-color: #777;
+  }
+  
+  .navbar-items {
+    display: flex;
+  }
+  
+  .navbar-items a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+  }
+  
+  .navbar-items a:hover {
+    background-color: #555;
+  }
+  
+  /* Media Queries for Responsiveness */
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      bottom: 10px;
+    }
+  
+    .navbar-content {
+      margin-bottom: 5px;
+    }
+  }
+  

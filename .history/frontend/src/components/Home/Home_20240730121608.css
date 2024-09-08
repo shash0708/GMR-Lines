@@ -1,0 +1,26 @@
+.Home{
+    display: flex;
+    justify-content: center;
+    
+    /* Make sure this is set */
+    /* Horizontally center the form */
+    
+    align-items: center; /* Vertically center the form */
+    min-height: 7vh;
+    margin: 0px; /* Ensure it takes up the full viewport height */
+    flex-direction: column; /* Stack the form vertically */
+    background-color: #ffffff;
+}
+.img{
+    display: flex;
+    justify-content: center;
+    
+    /* Make sure this is set */
+    /* Horizontally center the form */
+    
+    align-items: center; /* Vertically center the form */
+    height: 500px;
+    margin: 0px; /* Ensure it takes up the full viewport height */
+    flex-direction: column; /* Stack the form vertically */
+   
+}

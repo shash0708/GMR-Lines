@@ -1,0 +1,31 @@
+.Home {
+    position: relative;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden;
+  }
+  
+  .image-container {
+    position: relative;
+    width: 500px;
+    height: 10px;
+  }
+  
+  .background-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the container without distortion */
+  }
+  
+  .card {
+    position: absolute;
+    top: 10%; /* Adjust as needed to position the card */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px 20px 0 0; /* Rounded corners at the top */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for card effect */
+    width: 80%; /* Adjust width as needed */
+    text-align: center;
+  }
+  

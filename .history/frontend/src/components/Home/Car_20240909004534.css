@@ -1,0 +1,12 @@
+/* src/components/Card/Card.css */
+.card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0.6px;
+    margin: 16px;
+    display: flex;
+    z-index: 99;
+    text-align: center;
+  }
+  

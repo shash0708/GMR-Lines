@@ -10,63 +10,100 @@ const fs = require("fs");
 const { exec } = require('child_process');
 
 // const generatePDF = require('../template/generatePdf')
+router.get('/latestId', fetchuser, async (req, res) => {
+  try {
+    const userId = req.user.Id; // Extract user ID from req.user (decoded from token)
+    const latestLog = await Log.findOne({ userId }).sort({ createdAt: -1 }); // Find latest log by user ID
+
+    if (latestLog) {
+      res.json({ latestId: latestLog.Id }); // Return latest log ID
+    } else {
+      res.json({ latestId: 0 }); // If no logs found, return 0
+    }
+  } catch (error) {
+    console.error('Error fetching latest ID:', error);
+    res.status(500).send('Server Error');
+  }
+});
 //Route 1
 router.post('/createLog', fetchuser, async (req, res) => {
   try {
-      const { Id,ToA, reg, ATA, Wo, Mt, TOM, TOA, C, DU, Supervisor } = req.body;
-      // Validate request data
-      const userId = req.user.id; // Get user ID from the request object
+    const { Id, Location, ACTtype, ACRegNo, TOM, CPU, FOT, SGH, RI, MEL, TS, MOD, REP, INSP, Training, Perform, Supervise, CRS_RTS, ATA, OP, DU, MRR, Supervisor } = req.body;
 
+    // Get user ID from the request object
+    const userId = req.user.id;
 
-      // Generate a new ID for the log
-      // const Id = await Log.countDocuments() + 1;
+    // Create a new log document
+    const newLog = new Log({
+      Id,
+      Location,
+      ACTtype,
+      ACRegNo,
+      TOM,
+      CPU,
+      FOT,
+      SGH,
+      RI,
+      MEL,
+      TS,
+      MOD,
+      REP,
+      INSP,
+      Training,
+      Perform,
+      Supervise,
+      CRS_RTS,
+      ATA,
+      OP,
+      DU,
+      MRR,
+      Supervisor,
+      user: req.user.id, 
+    });
 
-      // Create a new log document
-      const newLog = new Log({
-       
-          Id,
-          ToA,
-          reg,
-          ATA,
-          Wo,
-          Mt,
-          TOM,
-          TOA,
-          C,
-          DU,
-          Supervisor,
-          user: userId 
+    // Save the document to the database
+    await newLog.save();
 
-      });
-
-      // Save the document to the database
-      await newLog.save();
-
-      // Generate an authentication token (if needed)
-   
-      // Send a success response with the newly created log and token
-      return res.status(201).json({newLog });
+    return res.status(201).json({ newLog,AME:AME });
   } catch (error) {
-      // Log the error and send an error response
-      console.error(error);
-      return res.status(500).json({ error: 'Internal Server Error' });
+    console.error(error);
+    return res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
 
 
-//Route 2
-router.delete('/deleteLog/:Id', fetchuser,async (req, res) => {
-    try {
-        const log = await Log.findOneAndDelete({ Id: req.params.Id }); // Use custom Id to delete the log
-        if (!log) return res.status(404).json({ error: 'Log not found' });
 
-        res.json({ success: 'Log deleted successfully' });
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).json({ error: 'Server Error' });
+//Route 2
+// Route to delete a log by Id
+router.delete('/deleteLog/:Id', fetchuser, async (req, res) => {try {
+    const id = Number(req.params.Id); // Convert to number
+
+    if (isNaN(id)) {
+      return res.status(400).json({ error: 'Invalid Id format' });
     }
+
+    // Delete the log
+    const log = await Log.findOneAndDelete({ Id: id, user: req.user.id });
+
+    if (!log) return res.status(404).json({ error: 'Log not found' });
+
+    // Find the new latest log
+    const latestLog = await Log.findOne({ user: req.user.id }).sort({ createdAt: -1 });
+
+    // Send the response
+    res.json({
+      success: 'Log deleted successfully',
+      deletedAt: new Date(),
+      latestId: latestLog ? latestLog.Id : 0
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ error: 'Server Error' });
+  }
 });
+
+
 
 
   // Route to delete multiple logs by their IDs
@@ -105,56 +142,66 @@ router.delete('/deleteLog/:Id', fetchuser,async (req, res) => {
 // Route to update a log by custom Id
 router.put('/updatenotes/:Id', fetchuser, async (req, res) => {
   try {
-      const id = Number(req.params.Id); // Convert to number
+    const id = Number(req.params.Id); // Convert to number
 
-      if (isNaN(id)) {
-          return res.status(400).json({ error: 'Invalid Id format' });
-      }
+    if (isNaN(id)) {
+      return res.status(400).json({ error: 'Invalid Id format' });
+    }
 
-      // Check if the document exists with the given custom Id
-      const log = await Log.findOne({ Id: id });
+    // Find the log by custom Id and user
+    const log = await Log.findOne({ Id: id, user: req.user.id });
 
-      if (!log) {
-          return res.status(404).json({ error: 'Log not found' });
-      }
+    if (!log) {
+      return res.status(404).json({ error: 'Log not found' });
+    }
 
-      // Uncomment and adjust if using authorization middleware
-      // if (log.user.toString() !== req.user.id) return res.status(401).json({ error: 'Not authorized' });
+    // Destructure the fields from the request body
+    const { Location, ACType, ACRegNo, TOM, CPU, FOT, SGH, RI, MEL, TS, MOD, REP, INSP, Training, Perform, Supervise, CRS_RTS, ATA, OP, DU, MRR, Supervisor } = req.body;
 
-      // Destructure the fields from the request body
-      const { ToA, reg, ATA, Wo, Mt, TOM, TOA, C, DU, Supervisor } = req.body;
+    // Create an object with the fields to be updated
+    const updatedFields = {};
+    if (Location) updatedFields.Location = Location;
+    if (ACType) updatedFields.ACType = ACType;
+    if (ACRegNo) updatedFields.ACRegNo = ACRegNo;
+    if (TOM) updatedFields.TOM = TOM;
+    if (CPU) updatedFields.CPU = CPU;
+    if (FOT) updatedFields.FOT = FOT;
+    if (SGH) updatedFields.SGH = SGH;
+    if (RI) updatedFields.RI = RI;
+    if (MEL) updatedFields.MEL = MEL;
+    if (TS) updatedFields.TS = TS;
+    if (MOD) updatedFields.MOD = MOD;
+    if (REP) updatedFields.REP = REP;
+    if (INSP) updatedFields.INSP = INSP;
+    if (Training) updatedFields.Training = Training;
+    if (Perform) updatedFields.Perform = Perform;
+    if (Supervise) updatedFields.Supervise = Supervise;
+    if (CRS_RTS) updatedFields.CRS_RTS = CRS_RTS;
+    if (ATA) updatedFields.ATA = ATA;
+    if (OP) updatedFields.OP = OP;
+    if (DU) updatedFields.DU = DU;
+    if (MRR) updatedFields.MRR = MRR;
+    if (Supervisor) updatedFields.Supervisor = Supervisor;
 
-      // Create an object with the fields to be updated
-      const updatedFields = {};
-      if (ToA) updatedFields.ToA = ToA;
-      if (reg) updatedFields.reg = reg;
-      if (ATA) updatedFields.ATA = ATA;
-      if (Wo) updatedFields.Wo = Wo;
-      if (Mt) updatedFields.Mt = Mt;
-      if (TOM) updatedFields.TOM = TOM;
-      if (TOA) updatedFields.TOA = TOA;
-      if (C) updatedFields.C = C;
-      if (DU) updatedFields.DU = DU;
-      if (Supervisor) updatedFields.Supervisor = Supervisor;
+    // Update the log with new fields and timestamps
+    const updatedLog = await Log.findOneAndUpdate(
+      { Id: id }, // Query by custom Id field
+      { $set: updatedFields },
+      { new: true, runValidators: true, timestamps: true } // Ensure validators and timestamps are updated
+    );
 
-      // Update the log with new fields
-      const updatedLog = await Log.findOneAndUpdate(
-          { Id: id }, // Query by custom Id field
-          { $set: updatedFields },
-          { new: true, runValidators: true } // Ensure validators are run
-      );
+    if (!updatedLog) {
+      return res.status(404).json({ error: 'Log not found for update' });
+    }
 
-      if (!updatedLog) {
-          return res.status(404).json({ error: 'Log not found for update' });
-      }
-
-      // Respond with the updated log
-      res.json({ log: updatedLog });
+    // Respond with the updated log
+    res.json({ log: updatedLog });
   } catch (error) {
-      console.error('Error updating log:', error.message);
-      res.status(500).json({ error: 'Server Error' });
+    console.error('Error updating log:', error.message);
+    res.status(500).json({ error: 'Server Error' });
   }
 });
+
 
 //Route 4
 router.get('/logs',fetchuser, async (req, res) => {
@@ -184,17 +231,45 @@ router.get('/logs',fetchuser, async (req, res) => {
   }
 });
 
-router.get('/logs/:Id', fetchuser, async (req, res) => {
+//Get user Details
+// Get user data by AME
+router.get('/getuser/:ame', async (req, res) => {
   try {
-    const id = Number(req.params.Id); // Convert to number
+    const user = await User.findOne({ AME: req.params.ame });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    res.json(user);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server error');
+  }
+});
+
+
+router.get('/Getlogs/:Id', fetchuser, async (req, res) => {
+  try {
+    const id = Number(req.params.Id);
 
     if (isNaN(id)) {
       return res.status(400).json({ error: 'Invalid Id format' });
     }
 
-    const log = await Log.findOne({ Id: id }); // Use findOne for custom fields
+    const log = await Log.findOne({ Id: id }); // Fetch the log
     if (!log) return res.status(404).json({ error: 'The Log with the given ID was not found' });
-    if (log.user.toString() !== req.user.id) return res.status(401).json({ error: 'Not authorized' });
+
+    // Log both log.user and req.user to ensure they are both defined and correct
+    console.log('Log User:', log.user); 
+    console.log('Request User ID:', req.user.id); 
+
+    if (!log.user) {
+      return res.status(500).json({ error: 'Log does not have a user assigned' });
+    }
+
+    // Check authorization
+    // if (log.user.toString() !== req.user.id) {
+    //   return res.status(401).json({ error: 'Not authorized' });
+    // }
 
     res.status(200).json(log);
   } catch (error) {
@@ -202,6 +277,7 @@ router.get('/logs/:Id', fetchuser, async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 
 //Route 5
@@ -220,81 +296,81 @@ router.get('/entries', fetchuser,async (req, res) => {
 });
 
 // Route to export selected entries to Excel
-router.get('/s',(req,res)=>{
-   res.send("HI");
-})
+// router.get('/s',(req,res)=>{
+//    res.send("HI");
+// })
 
-router.post('/export', fetchuser,async (req, res) => {
-  const selectedIds = req.body; // Expecting an array of IDs
+// router.post('/export', fetchuser,async (req, res) => {
+//   const selectedIds = req.body; // Expecting an array of IDs
 
-  try {
+//   try {
    
-    // Fetch data for the selected IDs
-    const logs = await Log.find({ Id: { $in: selectedIds } }).exec();
+//     // Fetch data for the selected IDs
+//     const logs = await Log.find({ Id: { $in: selectedIds } }).exec();
 
-    if (logs.length === 0) {
-      return res.status(404).json({ message: 'No logs found for the selected IDs' });
-    }
+//     if (logs.length === 0) {
+//       return res.status(404).json({ message: 'No logs found for the selected IDs' });
+//     }
 
-    // Create a new Excel workbook and worksheet
-    const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('Logs');
+//     // Create a new Excel workbook and worksheet
+//     const workbook = new ExcelJS.Workbook();
+//     const worksheet = workbook.addWorksheet('Logs');
 
-    // Define columns for the worksheet
-    worksheet.columns = [
+//     // Define columns for the worksheet
+//     worksheet.columns = [
      
-      { header: 'ID', key: 'Id', width: 10 },
-      { header: 'ToA', key: 'ToA', width: 15 },
-      { header: 'Reg', key: 'reg', width: 15 },
-      { header: 'ATA', key: 'ATA', width: 15 },
-      { header: 'Wo', key: 'Wo', width: 15 },
-      { header: 'Mt', key: 'Mt', width: 15 },
-      { header: 'TOM', key: 'TOM', width: 15 },
-      { header: 'TOA', key: 'TOA', width: 15 },
-      { header: 'C', key: 'C', width: 15 },
-      { header: 'DU', key: 'DU', width: 15 },
-      { header: 'Supervisor', key: 'Supervisor', width: 20 }
-    ];
+//       { header: 'ID', key: 'Id', width: 10 },
+//       { header: 'ToA', key: 'ToA', width: 15 },
+//       { header: 'Reg', key: 'reg', width: 15 },
+//       { header: 'ATA', key: 'ATA', width: 15 },
+//       { header: 'Wo', key: 'Wo', width: 15 },
+//       { header: 'Mt', key: 'Mt', width: 15 },
+//       { header: 'TOM', key: 'TOM', width: 15 },
+//       { header: 'TOA', key: 'TOA', width: 15 },
+//       { header: 'C', key: 'C', width: 15 },
+//       { header: 'DU', key: 'DU', width: 15 },
+//       { header: 'Supervisor', key: 'Supervisor', width: 20 }
+//     ];
 
-    // Add rows to the worksheet
-    logs.forEach(log => {
-      worksheet.addRow({
+//     // Add rows to the worksheet
+//     logs.forEach(log => {
+//       worksheet.addRow({
     
-        Id: log.Id,
-        ToA: log.ToA,
-        reg: log.reg,
-        ATA: log.ATA,
-        Wo: log.Wo,
-        Mt: log.Mt,
-        TOM: log.TOM,
-        TOA: log.TOA,
-        C: log.C,
-        DU: log.DU,
-        Supervisor: log.Supervisor
-      });
-    });
+//         Id: log.Id,
+//         ToA: log.ToA,
+//         reg: log.reg,
+//         ATA: log.ATA,
+//         Wo: log.Wo,
+//         Mt: log.Mt,
+//         TOM: log.TOM,
+//         TOA: log.TOA,
+//         C: log.C,
+//         DU: log.DU,
+//         Supervisor: log.Supervisor
+//       });
+//     });
 
-    // Write the workbook to a file
-    res.setHeader('Content-Disposition', 'attachment; filename=exported_data.xlsx');
-    await workbook.xlsx.write(res);
-    res.end();
-  } catch (error) {
-    console.error('Error exporting data:', error);
-    res.status(500).json({ message: 'Error exporting data' });
-  }
-});
+//     // Write the workbook to a file
+//     res.setHeader('Content-Disposition', 'attachment; filename=exported_data.xlsx');
+//     await workbook.xlsx.write(res);
+//     res.end();
+//   } catch (error) {
+//     console.error('Error exporting data:', error);
+//     res.status(500).json({ message: 'Error exporting data' });
+//   }
+// });
 
-router.get('/los', fetchuser,async (req, res) => {
-  try {
-    const ids = req.query.ids.split(',').map(Number);
-    const logs = await Log.find({ Id: { $in: ids } });
-    res.json(logs);
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
+// router.get('/los', fetchuser,async (req, res) => {
+//   try {
+//     const ids = req.query.ids.split(',').map(Number);
+//     const logs = await Log.find({ Id: { $in: ids } });
+//     res.json(logs);
+//   } catch (err) {
+//     res.status(500).send(err);
+//   }
+// });
 
-// router.post('/pdf', fetchuser, async (req, res) => {
+
 //   const selectedIds = req.body;
 
 //   try {

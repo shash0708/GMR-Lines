@@ -1,0 +1,127 @@
+.car{
+    margin-top: 100px;
+}
+.card-container {
+    display: flex;
+    flex-wrap: wrap;  /* Allow cards to wrap to the next line */
+    justify-content: center;  /* Center the cards horizontally */
+    gap: 20px;  /* Space between the cards */
+    margin: 20px;  /* Space around the entire card container */
+}
+
+
+.Input {
+  padding: 12px;
+  margin-top: 20px;
+  border-radius: 10px;
+  color: black;
+  border: 2px ;
+  display: flex;
+  width: 80%;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background-color: #ebebeb; /* Set background color to gray */
+}
+
+
+
+.item-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid black;
+    position: relative; /* Required for positioning checkbox */
+    width: 330px;
+    margin-left: -5px;
+    margin: 10px; /* Optional spacing between cards */
+    cursor: pointer; /* Change cursor to pointer */
+  }
+  
+  .icon-container {
+    background-color: #e9ecef;
+    padding: 10px;
+
+    border-radius: 10%;
+  }
+  .logs-container {
+    display: flex;           /* Use flexbox for alignment */
+    justify-content: space-between; /* Space between elements */
+    align-items: center;    /* Vertically center items */
+    padding: 10px;          /* Add some padding */
+  }
+  
+  .add-button {
+    cursor: pointer;        /* Change cursor to pointer for better UX */
+    font-size: 24px;       /* Adjust the font size as needed */
+    margin-right: -140px;
+  }
+  .logs-title{
+    margin-right: 130px;
+  }
+  
+  .plane-icon {
+    width: 24px;
+    height: 24px;
+    color: #000;
+  }
+  
+  .info-container {
+    flex-grow: 1;
+    margin-left: 10px;
+  }
+  
+  .date {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .id {
+    font-size: 12px;
+    color: #6c757d;
+    margin: 0;
+  }
+  
+  .arrow-container {
+    margin-left: 10px;
+  }
+  
+  .arrow-icon {
+    width: 24px;
+    height: 24px;
+    color: #000;
+  }
+  .Prnt{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+  }
+  /* Checkbox styles */
+  .checkbox-container {
+    position: absolute; /* Position it relative to the item-container */
+    top: 10px; /* Adjust according to your design */
+    right: 10px; /* Adjust according to your design */
+  }
+  
+  .checkbox {
+    width: 30px;
+    height: 30px;
+    margin-right: 30px;
+    margin-top: 20px;
+    border-radius: 50%;
+    background-color: #007bff; /* Color of checkbox */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .count {
+    font-size: 12px;
+  }
+  

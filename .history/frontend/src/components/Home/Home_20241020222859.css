@@ -1,0 +1,84 @@
+.Home {
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    /* background: url('assests/copybg.jpg') no-repeat center center fixed;  */
+    /* background-image:url('./assests/copybg.jpg'); */
+background-color:white;
+     background-size: cover;
+    min-height: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-y: scroll;
+  }  
+  
+
+  .hero-section {
+
+    width: auto;
+    height: 250px;
+    text-align: center;
+   
+  }
+  
+  .hero-section h1 {
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    margin-top: 20px;
+    font-size: 1.3rem;
+    color: #936363;
+    margin-bottom: 0.5rem;
+  }
+  
+  .hero-section p {
+    font-size: 1.25rem;
+    color: #ddd;
+  }
+  
+  .content {
+    text-align: center;
+  }
+  
+  .ame-number {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .btn-new-entry, .btn-past-records {
+    background-color: #005B96;
+    color: #fff;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .btn-new-entry:hover, .btn-past-records:hover {
+    background-color: #003f73;
+  }
+  
+  .aircrew-image {
+    width: 100%; /* Or any other width */
+    height: auto;
+    display: block; /* Ensure it's displayed as a block-level element */
+    margin: 0px auto;
+  }
+  
+
+  .Container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 280px;
+    margin-left:-150px;
+    overflow-y: scroll;
+
+
+  }
+
+  h1{
+    color:black
+  }

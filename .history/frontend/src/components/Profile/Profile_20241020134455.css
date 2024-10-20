@@ -1,0 +1,146 @@
+.Profile{
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    position: absolute;
+    top: 40px;
+    left: 10px;
+    margin-top:0px;
+    font-weight: 200px;
+
+    font-size: 20px;
+    
+    color:black;
+    height: auto;
+   
+}
+
+.settings{
+    position: absolute;
+    left:310px
+}
+.babes {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin-top:20px;
+    height: auto;
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .profile-container {
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 50px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-image {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    position:relative;
+    margin-left: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  h1 {
+    font-size: 1.5em;
+    margin: 10px 0;
+  }
+  
+  p {
+    color: #888;
+    font-size: 0.9em;
+  }
+  
+  .edit-button {
+    background-color: #d1cdcd;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    width:100%;
+    font-weight: bold;
+  }
+  
+  .edit-button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .profile-options {
+    /* border-top: 3px solid #ddd; */
+    padding-top: 10px;
+    overflow: scroll;
+  margin
+  }
+  
+  .profile-option {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border:2px ;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+    align-items: center;
+    /* border-bottom: 1px solid #ddd; */
+  }
+  
+  .profile-option:last-child {
+    border-bottom: none;
+  }
+  
+  .profile-option:hover {
+    background-color: #f9f9f9;
+
+   
+  }
+  .collapse-content {
+    padding: 10px;
+    border-left: 2px solid #ddd;
+    margin-left: 10px;
+    font-size: 0.9em;
+    color: #555;
+    overflow: auto; /* Allow scrolling if content is too long */
+    max-height: 400px; /* Optional: Limit height before scrolling */
+    transition: max-height 0.3s ease; /* Smooth transition when collapsing/expanding */
+}
+
+  .option-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px; /* Add some padding for better spacing */
+
+  }
+  .option-text {
+    margin-right: 10px; /* Adjust this value to control the space */
+    flex-grow: 1; /* Make the text take up available space */
+  }
+  /* Arrow styling */
+  .arrow {
+    margin-left: auto; /* Push the arrow to the extreme right */
+
+    transition: transform 0.3s ease; 
+  }
+  
+  .arrow.up {
+    transform: rotate(180deg); /* Rotate the arrow upside-down */
+  }
+  
+  .arrow.down {
+    transform: rotate(0deg); /* Default state with down arrow */
+  }

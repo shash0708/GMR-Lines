@@ -47,7 +47,7 @@ const LogForm = ({ user }) => {
   useEffect(() => {
     const fetchLatestId = async () => {
       try {
-        const response = await axios.get(`${URL}/logs/latestId`, {
+        const response = await axios.get(`${URL}/logs/latestId', {
           headers: {
             'Content-Type': 'application/json',
             "auth-token": localStorage.getItem('auth-token')

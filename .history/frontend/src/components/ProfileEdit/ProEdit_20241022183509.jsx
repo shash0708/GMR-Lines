@@ -29,7 +29,7 @@ console.log("--->>>>---",ameno);
     const fetchUserData = async () => {
       try {
         console.log("Fetching user data..."); // Debugging log
-        const response = await axios.get(`${URL}/api/getuser/${ameno}`, {
+        const response = await axios.get(`http://localhost:5000/api/getuser/${ameno}`, {
           headers: {
             'auth-token': localStorage.getItem('auth-token'), // Ensure the token is present
           },

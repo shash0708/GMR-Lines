@@ -47,7 +47,7 @@ const LogForm = ({ user }) => {
   useEffect(() => {
     const fetchLatestId = async () => {
       try {
-        const response = await axios.get(`${URL}/logs/latestId`, {
+        const response = await axios.get('http://localhost:5000/logs/latestId', {
           headers: {
             'Content-Type': 'application/json',
             "auth-token": localStorage.getItem('auth-token')
@@ -84,7 +84,7 @@ const LogForm = ({ user }) => {
 
     console.log('Form submitted:', formState);
 
-    axios.post(`${URL}/logs/createLog`, formState, {
+    axios.post(`${URL}/logs/createLog', formState, {
       headers: {
         'Content-Type': 'application/json',
         'auth-token': localStorage.getItem('auth-token'),

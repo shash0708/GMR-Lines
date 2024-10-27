@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
-import URL from '../config.js'
+import URL from '../config'
 const LogForm = ({ user }) => {
   const [formState, setFormState] = useState({
     Id: '',

@@ -14,7 +14,6 @@ import {
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import URL from '../config.js'
-import { toast } from 'react-toastify';
 const LogForm = ({ user }) => {
   const [formState, setFormState] = useState({
     Id: '',
@@ -92,8 +91,7 @@ const LogForm = ({ user }) => {
       }
     })
       .then(response => {
-        toast.success('New Log Created!');
-
+        
         console.log('Data saved:', response.data);
       })
       .catch(error => {

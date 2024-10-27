@@ -92,7 +92,7 @@ const LogForm = ({ user }) => {
       }
     })
       .then(response => {
-        toast.success('New Log Created!');
+        toast.success('Log  created!');
 
         console.log('Data saved:', response.data);
       })

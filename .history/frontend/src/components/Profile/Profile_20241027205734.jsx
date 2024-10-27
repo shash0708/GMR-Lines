@@ -3,7 +3,7 @@ import './Profile.css'; // Include your CSS for styling
 import { IoSettingsOutline } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import URL from '../config.js';
+import URL ftom 
 const Profile = () => {
   const [activeSection, setActiveSection] = useState(null);
   const [userData, setUserData] = useState(null); 

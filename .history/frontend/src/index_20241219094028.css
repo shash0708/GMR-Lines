@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,500;1,500&display=swap');
+
+/* Default Light Mode */
+body {
+    background: white;
+    color: black;
+    font-family: Arial, sans-serif;
+    transition: all 0.3s ease;
+  }
+  
+  /* Dark Mode */
+  body.dark-mode {
+    background: #121212;
+    color: white;
+  }
+  
+  /* Additional UI elements */
+  .settings-menu {
+    background: white;
+    color: black;
+    padding: 10px;
+    transition: all 0.3s ease;
+  }
+  
+  body.dark-mode .settings-menu {
+    background: #333;
+    color: white;
+  }
+  
+  .settings-button {
+    background: transparent;
+    border: 1px solid #555;
+    color: black;
+    padding: 8px 16px;
+    margin: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  body.dark-mode .settings-button {
+    background: #000000;
+    color: white;
+  }
+  
+  .profile-header .profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .image-menu-button {
+    background: transparent;
+    border: 1px solid #555;
+    color: black;
+    padding: 8px 16px;
+    margin: 5px;
+    cursor: pointer;
+  }
+  
+  body.dark-mode .image-menu-button {
+    background: #555;
+    color: white;
+  }
+  

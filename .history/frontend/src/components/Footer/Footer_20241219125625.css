@@ -1,0 +1,59 @@
+/* Footer Styles */
+.footer {
+    background-color: #f5f5f5;
+    color: #111418;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+  
+  .dark-mode{
+    
+  }
+  
+  /* Container for the navigation links */
+  .footer .nav-container {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    border-top: 1px solid #e5e5e5;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+  /* Individual navigation links */
+  .footer a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    color: #617189;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  
+  .footer a.active {
+    color: #111418;
+  }
+  
+  /* Icon size adjustment */
+  .footer svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+  }
+  
+
+  /* Style for the footer links */
+.nav-link {
+    color:black; /* Default color */
+  }
+  
+  /* Active state styling */
+  .nav-link.active {
+    color: white;  /* Highlight color when active */
+  }
+  

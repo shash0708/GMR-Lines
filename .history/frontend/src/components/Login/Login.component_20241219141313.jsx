@@ -1,4 +1,4 @@
-import React, { useState ,useContext} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import {
   TextField,
@@ -16,7 +16,7 @@ import { FaArrowLeftLong } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import URL from '../config';
-import { ThemeContext } from '../../context/ThemeChange.js';
+  
 
 
 const Login = () => {
@@ -85,10 +85,9 @@ const Login = () => {
       maxWidth="sm"
       sx={{
         backgroundColor: darkMode ? 'black' : 'white',
-        color: darkMode ? 'white' : '#000',
+        color: darkMode ? '#fff' : '#000',
         padding: 3,
         borderRadius: 2,
-      
         boxShadow: 'none',
       }}
     >
@@ -96,8 +95,7 @@ const Login = () => {
         variant="h4"
         gutterBottom
         sx={{
-          color: darkMode ? 'white' : '#000',
-
+          color: 'Black',
           textAlign: 'center',
           display: 'flex',
           alignItems: 'center',
@@ -105,9 +103,7 @@ const Login = () => {
         }}
       >
         <FaArrowLeftLong
-          style={{ fontSize: '14px' ,
-            color: darkMode ? 'white' : '#000',
-          }}
+          style={{ fontSize: '14px' }}
           onClick={() => window.history.back()}
         />
         SignUp
@@ -122,9 +118,7 @@ const Login = () => {
                   <FormControl fullWidth>
                     <InputLabel
                       id={`${field}-label`}
-                      sx={{         color: darkMode ? 'white' : '#000', 
-                        border: `1px solid ${darkMode ? '#fff' : '#000'}`, 
-                      }}
+                      sx={{ color: 'Black' }}
                     >
                       {field}
                     </InputLabel>
@@ -141,7 +135,7 @@ const Login = () => {
                           backgroundColor: 'white',
                         },
                         '& .MuiOutlinedInput-notchedOutline': {
-                          borderColor: 'black',
+                          borderColor: 'blue',
                         },
                         '& .MuiSelect-icon': { color: 'white' },
                         '& .MuiFormLabel-root.Mui-focused': {
@@ -149,7 +143,7 @@ const Login = () => {
                         },
                         '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline':
                           {
-                            borderColor: 'black',
+                            borderColor: 'blue',
                           },
                       }}
                     />
@@ -168,11 +162,11 @@ const Login = () => {
                     multiline={field === 'CPU' || field === 'OP'}
                     rows={field === 'CPU' || field === 'OP' ? 4 : 1}
                     sx={{
-                      '& .MuiInputBase-root': {         color: darkMode ? 'white' : '#000',   border: `1px solid ${darkMode ? '#fff' : '#000'}`, },
-                      '& .MuiInputBase-input': {       color: darkMode ? 'white' : '#000',  border: `1px solid ${darkMode ? '#fff' : '#000'}`,  },
-                      '& .MuiFormLabel-root': {        color: darkMode ? 'white' : '#000', },
+                      '& .MuiInputBase-root': { color: 'Black' },
+                      '& .MuiInputBase-input': { color: 'Black' },
+                      '& .MuiFormLabel-root': { color: 'Black' },
                       '& .MuiOutlinedInput-root': {
-                        '& fieldset': { borderColor: 'black' },
+                        '& fieldset': { borderColor: 'blue' },
                         '&:hover fieldset': { borderColor: 'Black' },
                         '&.Mui-focused fieldset': { borderColor: 'Black' },
                       },

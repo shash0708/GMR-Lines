@@ -141,7 +141,7 @@ const Login = () => {
                           backgroundColor: 'white',
                         },
                         '& .MuiOutlinedInput-notchedOutline': {
-                          borderColor: 'black',
+                          borderColor: 'blue',
                         },
                         '& .MuiSelect-icon': { color: 'white' },
                         '& .MuiFormLabel-root.Mui-focused': {

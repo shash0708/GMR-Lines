@@ -88,7 +88,7 @@ const Login = () => {
         color: darkMode ? 'white' : '#000',
         padding: 3,
         borderRadius: 2,
-      
+        border: `1px solid ${darkMode ? '#fff' : '#000'}`, 
         boxShadow: 'none',
       }}
     >
@@ -122,9 +122,7 @@ const Login = () => {
                   <FormControl fullWidth>
                     <InputLabel
                       id={`${field}-label`}
-                      sx={{         color: darkMode ? 'white' : '#000', 
-                        border: `1px solid ${darkMode ? '#fff' : '#000'}`, 
-                      }}
+                      sx={{         color: darkMode ? 'white' : '#000', }}
                     >
                       {field}
                     </InputLabel>
@@ -141,7 +139,7 @@ const Login = () => {
                           backgroundColor: 'white',
                         },
                         '& .MuiOutlinedInput-notchedOutline': {
-                          borderColor: 'black',
+                          borderColor: 'blue',
                         },
                         '& .MuiSelect-icon': { color: 'white' },
                         '& .MuiFormLabel-root.Mui-focused': {
@@ -149,7 +147,7 @@ const Login = () => {
                         },
                         '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline':
                           {
-                            borderColor: 'black',
+                            borderColor: 'blue',
                           },
                       }}
                     />
@@ -168,11 +166,11 @@ const Login = () => {
                     multiline={field === 'CPU' || field === 'OP'}
                     rows={field === 'CPU' || field === 'OP' ? 4 : 1}
                     sx={{
-                      '& .MuiInputBase-root': {         color: darkMode ? 'white' : '#000',   border: `1px solid ${darkMode ? '#fff' : '#000'}`, },
-                      '& .MuiInputBase-input': {       color: darkMode ? 'white' : '#000',  border: `1px solid ${darkMode ? '#fff' : '#000'}`,  },
+                      '& .MuiInputBase-root': {         color: darkMode ? 'white' : '#000',},
+                      '& .MuiInputBase-input': {       color: darkMode ? 'white' : '#000', },
                       '& .MuiFormLabel-root': {        color: darkMode ? 'white' : '#000', },
                       '& .MuiOutlinedInput-root': {
-                        '& fieldset': { borderColor: 'black' },
+                        '& fieldset': { borderColor: 'blue' },
                         '&:hover fieldset': { borderColor: 'Black' },
                         '&.Mui-focused fieldset': { borderColor: 'Black' },
                       },

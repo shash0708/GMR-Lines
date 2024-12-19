@@ -1,4 +1,4 @@
-import React, { useState ,useContext} from 'react';
+import React, { useState,useContext } from 'react';
 import axios from 'axios';
 import {
   TextField,
@@ -18,16 +18,24 @@ import { toast } from 'react-toastify';
 import URL from '../config';
 import { ThemeContext } from '../../context/ThemeChange.js';
 
-
-const Login = () => {
-    const { darkMode, toggleTheme } = useContext(ThemeContext);
+const Signup = () => {
+      const { darkMode, toggleTheme } = useContext(ThemeContext);
   
   const [formState, setFormState] = useState({
+    Name: '',
+    Location: '',
+    Designation: '',
     AME: '',
-    password: '',
+    Email: '',
+    Phone: '',
+    password:'',
+    cpassword:'',
+
   });
 
+
   const navigate = useNavigate();
+  // const URL = 'your_api_url_here'; // Replace with your API URL
 
   // Handle input change
   const handleInputChange = (e) => {
@@ -35,60 +43,62 @@ const Login = () => {
     setFormState((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  // Function to log in a user and store AME and token in localStorage
+  // Function to create a user and store AME in localStorage
   const handleCreateUser = async () => {
     try {
+      // Log the formState to see what is being sent
       console.log('Form state:', formState);
       
-      const response = await axios.post(`${URL}/api/login`, formState, {
+      const response = await axios.post(`${URL}/api/createuser`, formState, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
   
+      // Log the entire response to debug
       console.log('Response:', response);
-      console.log('Response data:', response.data); // Log the response data for debugging
-      const json = response.data; // Directly access the data property
-    
+      const json = response.data;
+
       if (response.status === 200) {
-        // Check if authtoken exists in the response
-        const token = json.authtoken; // Adjust this line based on the actual structure of your response
         const ameNumber = formState.AME;
         console.log('AME number:', ameNumber);
-        if (token && ameNumber) {
-          localStorage.setItem('auth-token', token); 
-          localStorage.setItem('ameNumber', ameNumber);
+        localStorage.setItem('auth-token', json.authtoken);
+        console.log(json.authoken)
   
-          toast.success('User logged in successfully!'); // Update success message
+        if (ameNumber) {
+          localStorage.setItem('ameNumber', ameNumber);
+          toast.success('User created successfully!');
           navigate('/profile');
         } else {
-          toast.error('Token is missing from the response');
+          toast.error('AME number is missing from the response');
         }
       } else {
-        toast.error('Failed to log in user');
+        toast.error('Failed to create user');
       }
-    } catch (error) {
-      console.error('Error logging in user:', error);
   
+    } catch (error) {
+      // Log the full error to understand the issue
+      console.error('Error creating user:', error);
+      
+      // Check if the error response is available
       if (error.response) {
         console.error('Error response data:', error.response.data);
         toast.error('Error: ' + (error.response.data.message || 'Invalid request'));
       } else {
-        toast.error('Error logging in user: ' + error.message);
+        toast.error('Error creating user: ' + error.message);
       }
     }
   };
   
-
+  
   return (
     <Container
       maxWidth="sm"
       sx={{
         backgroundColor: darkMode ? 'black' : 'white',
-        color: darkMode ? 'white' : '#000',
-        padding: 3,
+        color: darkMode ? 'white' : '#000',       
+         padding: 3,
         borderRadius: 2,
-      
         boxShadow: 'none',
       }}
     >
@@ -96,8 +106,8 @@ const Login = () => {
         variant="h4"
         gutterBottom
         sx={{
-          color: darkMode ? 'white' : '#000',
-
+          backgroundColor: darkMode ? 'black' : 'white',
+          color: darkMode ? 'white' : '#000',      
           textAlign: 'center',
           display: 'flex',
           alignItems: 'center',
@@ -105,13 +115,13 @@ const Login = () => {
         }}
       >
         <FaArrowLeftLong
-          style={{ fontSize: '14px' ,
-            color: darkMode ? 'white' : '#000',
-          }}
+          style={{ fontSize: '14px',
+            backgroundColor: darkMode ? 'black' : 'white',
+            color: darkMode ? 'white' : '#000',      
+           }}
           onClick={() => window.history.back()}
         />
-        SignUp
-      </Typography>
+SignUp      </Typography>
       <form>
         <Grid container spacing={2}>
           {Object.keys(formState)
@@ -122,9 +132,8 @@ const Login = () => {
                   <FormControl fullWidth>
                     <InputLabel
                       id={`${field}-label`}
-                      sx={{         color: darkMode ? 'white' : '#000', 
-                        border: `1px solid ${darkMode ? '#fff' : '#000'}`, 
-                      }}
+                      sx={{  color: darkMode ? 'white' : '#000', 
+                        border: `1px solid ${darkMode ? '#fff' : '#000'}`}}
                     >
                       {field}
                     </InputLabel>
@@ -137,22 +146,23 @@ const Login = () => {
                       required
                       sx={{
                         '& .MuiSelect-select': {
-                          color: 'black',
-                          backgroundColor: 'white',
+                          backgroundColor: darkMode ? 'black' : 'white',
+        color: darkMode ? 'white' : '#000',      
                         },
                         '& .MuiOutlinedInput-notchedOutline': {
-                          borderColor: 'black',
+                          borderColor: 'blue',
                         },
                         '& .MuiSelect-icon': { color: 'white' },
                         '& .MuiFormLabel-root.Mui-focused': {
-                          color: 'white',
+                          backgroundColor: darkMode ? 'black' : 'white',
+                          color: darkMode ? 'white' : '#000',      
                         },
                         '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline':
                           {
-                            borderColor: 'black',
+                            borderColor: 'blue',
                           },
                       }}
-                    />
+                    ></Select>
                   </FormControl>
                 </Grid>
               ) : (
@@ -168,11 +178,13 @@ const Login = () => {
                     multiline={field === 'CPU' || field === 'OP'}
                     rows={field === 'CPU' || field === 'OP' ? 4 : 1}
                     sx={{
-                      '& .MuiInputBase-root': {         color: darkMode ? 'white' : '#000',   border: `1px solid ${darkMode ? '#fff' : '#000'}`, },
-                      '& .MuiInputBase-input': {       color: darkMode ? 'white' : '#000',  border: `1px solid ${darkMode ? '#fff' : '#000'}`,  },
-                      '& .MuiFormLabel-root': {        color: darkMode ? 'white' : '#000', },
+                      '& .MuiInputBase-root': {  backgroundColor: darkMode ? 'black' : 'white',
+                        color: darkMode ? 'white' : '#000',       },
+                      '& .MuiInputBase-input': {  backgroundColor: darkMode ? 'black' : 'white',
+                        color: darkMode ? 'white' : '#000',       },
+                      '& .MuiFormLabel-root': { color: 'Black' },
                       '& .MuiOutlinedInput-root': {
-                        '& fieldset': { borderColor: 'black' },
+                        '& fieldset': { borderColor: 'blue' },
                         '&:hover fieldset': { borderColor: 'Black' },
                         '&.Mui-focused fieldset': { borderColor: 'Black' },
                       },
@@ -196,4 +208,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

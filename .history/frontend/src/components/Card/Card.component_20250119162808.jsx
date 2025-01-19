@@ -130,8 +130,8 @@ const Cards = () => {
     margin-top: -1px; /* Reduced top margin */
 
         }
-     th{
-        font-weight: 900; /* Stronger bold */
+    th{
+      font
     }
         th, td {
             border: 1px solid black;

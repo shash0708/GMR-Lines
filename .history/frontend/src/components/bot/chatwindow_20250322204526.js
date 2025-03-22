@@ -257,7 +257,7 @@ const ChatWindow = () => {
       });
 
       if (response.ok) {
-        toast.success('New Log Created!');
+import { toast } from 'react-toastify';
         window.location.href = "/past-records"; // Redirect to past records page
       } else {
         

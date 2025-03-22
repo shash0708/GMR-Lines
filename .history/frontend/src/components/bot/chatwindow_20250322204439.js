@@ -4,7 +4,6 @@ import dayjs from 'dayjs';
 import { RiSendPlaneFill } from "react-icons/ri";
 import URL from '../config.js';
 import "./chatwindow.css";
-import { toast } from 'react-toastify';
 
 const ChatWindow = () => {
   const [messages, setMessages] = useState([]);

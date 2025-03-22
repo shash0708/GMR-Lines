@@ -30,11 +30,41 @@ export const LogsProvider = ({ children }) => {
 
   useEffect(() => {
     const handleSearch = () => {
-      const lowerCaseSearchTerm = searchTerm.toLowerCase();
-      const filtered = logs.filter((log) => {
-        const logId = String(log.Toa);
-        return logId.toLowerCase().includes(lowerCaseSearchTerm);
+      const searchTermLower = searchTerm.toLowerCase().trim();
+      
+      if (!searchTermLower) {
+        setFilteredLogs(logs);
+        return;
+      }
+
+      const filtered = logs.filter(log => {
+        // Search in all fields
+        return Object.entries(log).some(([key, value]) => {
+          // Skip non-searchable fields
+          if (key === '_id' || key === '__v' || key === 'user') return false;
+          
+          // Handle null/undefined values
+          if (value === null || value === undefined) return false;
+          
+          // Handle objects (like ATC)
+          if (typeof value === 'object') {
+            return Object.values(value).some(v => 
+              String(v).toLowerCase().includes(searchTermLower)
+            );
+          }
+          
+          // Handle dates
+          if (key === 'dateTime') {
+            const date = new Date(value);
+            const formattedDate = date.toLocaleDateString();
+            return formattedDate.toLowerCase().includes(searchTermLower);
+          }
+          
+          // Handle all other fields
+          return String(value).toLowerCase().includes(searchTermLower);
+        });
       });
+
       setFilteredLogs(filtered);
     };
 

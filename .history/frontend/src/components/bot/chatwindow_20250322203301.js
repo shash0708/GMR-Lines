@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Topbar from "./Topbar/Topbar";
 import dayjs from 'dayjs';
 import { RiSendPlaneFill } from "react-icons/ri";
-import URL from '../config.js';
+
 import "./chatwindow.css";
 
 const ChatWindow = () => {
@@ -259,7 +259,7 @@ const ChatWindow = () => {
         alert("Log created successfully!");
         window.location.href = "/past-records"; // Redirect to past records page
       } else {
-        
+        console.log()
         throw new Error("Failed to create log");
       }
     } catch (error) {

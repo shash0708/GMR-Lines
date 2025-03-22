@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Topbar from "./Topbar/Topbar";
 import dayjs from 'dayjs';
 import { RiSendPlaneFill } from "react-icons/ri";
-import URL from '../config.js';
+import URL 
 import "./chatwindow.css";
 
 const ChatWindow = () => {

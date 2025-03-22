@@ -110,7 +110,7 @@ const Login = () => {
           }}
           onClick={() => window.history.back()}
         />
-        SignUp
+        SignIn
       </Typography>
       <form>
         <Grid container spacing={2}>

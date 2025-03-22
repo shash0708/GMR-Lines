@@ -1,0 +1,40 @@
+.topbar-container {
+    margin: 50px;
+    padding-top: 60px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+    background-color: #2979FF;
+    color: white;
+    padding: 0 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+/* Add this to your body or root element to prevent content from hiding behind the topbar */
+
+.date-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.arrow-icon {
+    font-size: 24px;
+    color: black;
+}
+
+.date-text {
+    font-size: 20px;
+    font-weight: bold;
+}

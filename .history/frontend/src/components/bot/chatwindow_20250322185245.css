@@ -1,0 +1,132 @@
+.chat-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin-top: -70px;
+  }
+  
+  .messages-container {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    margin-top: 60px;
+  }
+  
+  .message {
+    max-width: 70%;
+    margin: 10px;
+    padding: 10px 15px;
+    border-radius: 15px;
+    word-wrap: break-word;
+  }
+  
+  .bot {
+    background-color: #e9ecef;
+    align-self: flex-start;
+    margin-left: -10px;
+  }
+  
+  .user {
+    background-color: #007bff;
+    color: white;
+    align-self: flex-end;
+    margin-left: 100px;
+  }
+  
+  .options-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px 0;
+  }
+  
+  .options-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0 10px;
+  }
+  
+  .option-button {
+    padding: 8px 16px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .option-button.selected {
+    background-color: #007bff;
+    color: white;
+    border-color: #0056b3;
+  }
+  
+  .submit-options-button {
+    margin: 10px;
+    padding: 8px 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    align-self: flex-end;
+  }
+  
+  .input-container {
+    display: flex;
+    padding: 20px;
+    background-color: #f8f9fa;
+    gap: 10px;
+    margin-bottom:-76px;
+    border:2px solid #f8f9fa;
+    
+  }
+  
+  .input-container input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+  }
+  
+  .input-container button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+
+  .submit-container {
+    padding: 1rem;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+  }
+  
+  .final-submit-button {
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .final-submit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .messages-container {
+    padding-bottom: 80px; /* Add space for the submit button */
+  }

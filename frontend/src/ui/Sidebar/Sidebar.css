@@ -1,0 +1,17 @@
+/* Custom scrollbar for recent entries */
+.recent-entries::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .recent-entries::-webkit-scrollbar-track {
+    background: #202123;
+  }
+  
+  .recent-entries::-webkit-scrollbar-thumb {
+    background: #4d4d4f;
+    border-radius: 3px;
+  }
+  
+  .recent-entries::-webkit-scrollbar-thumb:hover {
+    background: #666;
+  }
